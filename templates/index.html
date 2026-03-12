@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArbScan Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <div>
+          <h1>ArbScan Pro</h1>
+          <p>Modern arbitrage console for sportsbooks + Polymarket with configurable edge thresholds.</p>
+        </div>
+        <button id="refresh">Refresh</button>
+      </header>
+
+      <section class="layout-grid">
+        <aside class="card">
+          <h2>Configuration</h2>
+          <div id="config-view" class="kv"></div>
+          <form id="config-form" class="config-form">
+            <label>Bankroll (USD)<input type="number" step="1" min="1" id="bankroll-input" /></label>
+            <label>Min Gross Margin %<input type="number" step="0.1" min="0" id="margin-input" /></label>
+            <label>Refresh Seconds<input type="number" step="1" min="5" id="refresh-input" /></label>
+            <button type="submit">Save config</button>
+          </form>
+          <p class="muted">API keys are shown masked for safety.</p>
+        </aside>
+
+        <section class="card">
+          <div class="status-row">
+            <span id="status">Idle</span>
+            <span id="summary" class="summary">Awaiting data…</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Market</th>
+                  <th>Edge %</th>
+                  <th>Implied Prob.</th>
+                  <th>Confidence</th>
+                  <th>Exp. Profit</th>
+                  <th>Execution legs</th>
+                </tr>
+              </thead>
+              <tbody id="opportunity-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <footer>
+        <small>Informational tool only. Validate fees, slippage, limits, and legal constraints before execution.</small>
+      </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
